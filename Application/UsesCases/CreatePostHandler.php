@@ -17,23 +17,29 @@ class CreatePostHandler
     public function handle(
         CreatePostRequest $request,
         CreatePostOutput $output,
-    ) {
+    ) : void {
 
-        // Add business logic here (service, repository, action, gateway ...)
+        try {
 
-        $postEntity = $this->postRepository->store(
-            new PostEntity(
-                id: null,
-                title: $request->title,
-            ),
-        );
+            // Add business logic here (service, repository, action, gateway ...)
 
-        $response = new CreatePostResponse($postEntity);
+            $postEntity = $this->postRepository->store(
+                new PostEntity(
+                    id: null,
+                    title: $request->title,
+                ),
+            );
 
-        /**
-         * Through this interface, the presenter layer handles response preparation.
-         * The application layer is unaware of the upstream layer details.
-         */
-        return $output->present($response);
+            $response = new CreatePostResponse($postEntity);
+
+            /**
+             * Through this interface, the presenter layer handles response preparation.
+             * The application layer is unaware of the upstream layer details.
+             */
+            $output->present($response);
+
+        } catch (\Throwable $th) {
+            $output->error($th);
+        }
     }
 }
