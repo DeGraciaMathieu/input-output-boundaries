@@ -2,43 +2,41 @@
 
 namespace Application\UsesCases;
 
+use Throwable;
 use Domain\Entities\PostEntity;
+use Application\UsesCases\CreatePostInput;
 use Application\UsesCases\CreatePostOutput;
-use Application\UsesCases\CreatePostRequest;
-use Application\UsesCases\CreatePostResponse;
 use Domain\Database\Repositories\PostRepository;
 
-class CreatePostHandler
+class CreatePostAction
 {
     public function __construct(
         private PostRepository $postRepository,
     ) {}
 
     public function handle(
-        CreatePostRequest $request,
+        CreatePostInput $input,
         CreatePostOutput $output,
     ) : void {
 
         try {
 
-            // Add business logic here (service, repository, action, gateway ...)
+            // Add business logic here (service, repository, gateway ...)
 
             $postEntity = $this->postRepository->store(
                 new PostEntity(
                     id: null,
-                    title: $request->title,
+                    title: $input->title(),
                 ),
             );
-
-            $response = new CreatePostResponse($postEntity);
 
             /**
              * Through this interface, the presenter layer handles response preparation.
              * The application layer is unaware of the upstream layer details.
              */
-            $output->present($response);
+            $output->present($postEntity);
 
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $output->error($th);
         }
     }

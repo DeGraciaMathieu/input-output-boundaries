@@ -2,13 +2,13 @@
 
 namespace Presenter\Http;
 
-use Application\UsesCases\CreatePostOutput;
-use Application\UsesCases\CreatePostResponse;
 use Throwable;
+use Domain\Entities\PostEntity;
+use Application\UsesCases\CreatePostOutput;
 
-class HttpCreatePostResponse implements CreatePostOutput
+class HttpCreatePostOutput implements CreatePostOutput
 {
-    public function present(CreatePostResponse $response): void
+    public function present(PostEntity $response): void
     {
         // Add here the logic specific to the web display of a post creation response 
     }

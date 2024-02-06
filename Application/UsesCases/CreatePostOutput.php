@@ -3,10 +3,10 @@
 namespace Application\UsesCases;
 
 use Throwable;
-use Application\UsesCases\CreatePostResponse;
+use Domain\Entities\PostEntity;
 
 interface CreatePostOutput
 {
-    public function present(CreatePostResponse $response): void;
+    public function present(PostEntity $postEntity): void;
     public function error(Throwable $th): void;
 }
