@@ -8,7 +8,7 @@ use Application\UsesCases\CreatePostOutput;
 
 class HttpCreatePostOutput implements CreatePostOutput
 {
-    public function present(PostEntity $response): void
+    public function present(PostEntity $postEntity): void
     {
         // Add here the logic specific to the web display of a post creation response 
     }
