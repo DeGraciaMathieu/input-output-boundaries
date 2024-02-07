@@ -7,6 +7,10 @@ use Presenter\Http\HttpCreatePostInput;
 use Presenter\Http\HttpCreatePostOutput;
 use Application\UsesCases\CreatePostAction;
 
+/**
+* The controller, from the presenter layer, is closest to the user; it acts as the bridge between the application and user inputs. 
+* It should not contain any business logic.
+*/
 class CreatePostController
 {
     public function __construct(
