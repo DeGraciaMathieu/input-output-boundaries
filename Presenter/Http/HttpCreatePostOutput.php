@@ -2,18 +2,22 @@
 
 namespace Presenter\Http;
 
+use Application\UsesCases\CreatePostResponseModel;
 use Throwable;
-use Domain\Entities\PostEntity;
 use Application\UsesCases\CreatePostOutput;
 
 class HttpCreatePostOutput implements CreatePostOutput
 {
-    public function present(PostEntity $postEntity): void
+    /**
+     * Add here the logic specific to the web display of a post creation response 
+     */
+    public function present(CreatePostResponseModel $model): void
     {
-        // Add here the logic specific to the web display of a post creation response 
+        $model->id();
+        $model->title();
     }
 
-    public function error(Throwable $th): void
+    public function error(CreatePostResponseModel $model, Throwable $th): void
     {
         //
     }
